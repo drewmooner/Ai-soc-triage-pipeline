@@ -39,3 +39,31 @@ The warm-model run took about 13.7× less time than the illustrative manual esti
 All sample events are synthetic and use documentation-range IP addresses. This educational prototype is not a production SOC tool, may produce incorrect summaries or mappings, and must not trigger automatic containment. Review every result before acting. Do not submit real logs or sensitive data to this project or a public repository.
 
 Alert categories follow the requested distribution: 8 TP, 4 FP, 5 TN, and 3 FN. Across TP and FN, examples cover all six requested ATT&CK IDs. Alert formats were informed by the [Wazuh ruleset](https://github.com/wazuh/wazuh/tree/master/ruleset/rules), and technique names and IDs should be checked against [MITRE ATT&CK Enterprise techniques](https://attack.mitre.org/techniques/enterprise/).
+
+## Threat Profile
+
+The simulated attack types are SSH brute force (T1110), privilege escalation (T1068), suspicious process or script execution (T1059), unauthorized file access (T1005), port scanning (T1046), and malware-related user execution (T1204). They were chosen to cover common identity, privilege, execution, data access, reconnaissance, and user-driven threat behaviors, while exercising all six ATT&CK mappings required by the project. The examples are synthetic and demonstrate triage behavior; they are not a complete enterprise threat model.
+
+## Log Sources
+
+The pipeline uses synthetic Wazuh-format JSON alert records. Each record contains an alert `id` and `timestamp`; `rule` data (`id`, `level`, and `description`); `agent` data (`id` and `name`); the `manager` name; a `location` such as an authentication log path; event `data` such as source IP and destination user; a `full_log` message; and an `alert_type` benchmark label. The `alert_type` field is removed before inference so the model cannot use the expected TP, FP, TN, or FN answer. These are generated examples, not events collected from an actual Wazuh deployment.
+
+## Detection Logic
+
+The prompt asks the model to assess the activity described by the alert, use only stated evidence, and treat alert content as untrusted data rather than instructions. It provides the six requested ATT&CK mappings, requires `Benign Activity` with `N/A` technique fields for clearly routine or approved activity, and allows `N/A` when suspicious activity does not support a specific mapping. The response must use a fixed JSON schema and one of four severity values. The triage script validates that schema, retries one invalid or evidence-conflicting answer, canonicalizes known ATT&CK names by ID, and applies narrow consistency checks for explicit benign context and clear attack indicators. This is preliminary triage; it does not replace rule evaluation or analyst investigation.
+
+## False Positive Mitigation
+
+The prompt tells the model not to treat routine approved behavior as an attack and gives examples of benign context, including successful login during approved maintenance. The pipeline also checks a limited set of explicit routine or approval phrases in the rule description and full log. If the model escalates one of those alerts, the pipeline changes the final result to `Benign Activity`, `N/A` techniques, and Low severity, while preserving the original model suggestion in the output for review. This phrase-based check is specific to the synthetic examples and would need to be replaced or supported by trusted change, identity, and asset context in a real environment.
+
+## Findings
+
+The final run processed 20 synthetic alerts: 8 TP, 4 FP, 5 TN, and 3 FN. All 20 saved records passed the output checks. The evidence consistency policy adjusted 9 model suggestions: 7 for explicit benign context and 2 for mismatched intent summaries. These results demonstrate the value of validating model responses against alert evidence, but they are not a measure of raw LLM accuracy because the final results include those policy corrections. The warm-model run averaged 21.833 seconds per alert (436.669 seconds total), compared with the project's illustrative, unmeasured 5-minute-per-alert manual estimate.
+
+## Recommendations
+
+- Keep AI-generated triage advisory; require an analyst to verify the event evidence, severity, and ATT&CK mapping before response actions.
+- Enrich alerts with trusted asset ownership, identity context, approved change windows, and related events so legitimate activity can be distinguished from attacks.
+- Validate detection coverage for low-and-slow scans and other behaviors that may not trigger basic rules; tune rules using reviewed incidents and false positive feedback.
+- Test prompts and evidence checks against a broader, representative dataset, and measure false positives, missed attacks, mapping quality, and latency separately.
+- Keep sensitive production logs and credentials out of this demonstration; apply the organization's data handling and access controls before any real deployment.
