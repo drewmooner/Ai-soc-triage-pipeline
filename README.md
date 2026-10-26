@@ -1,5 +1,30 @@
 # AI-Augmented SOC Alert Triage Pipeline
 
+## Executive Summary
+
+This project generates synthetic Wazuh-format security alerts and sends them to a locally hosted Llama model through Ollama for preliminary triage. It summarizes the observed activity, suggests a MITRE ATT&CK technique when supported by evidence, and assigns a preliminary severity. For enterprise security teams, this demonstrates how local AI can help analysts process alert queues while keeping alert data on the workstation. It also highlights the need to validate model output because missed context, false positives, and detection gaps can affect triage decisions.
+
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+    A[Wazuh JSON Alerts] --> B[generate_alerts.py]
+    B --> C[alerts/ folder]
+    C --> D[triage.py]
+    D --> E[Ollama / Llama 3.2 3B]
+    E --> F[output/triage_results.json]
+    E --> G[Terminal Summary]
+```
+
+## Technologies Used
+
+- Infrastructure: Local machine
+- OS: Windows
+- Language: Python 3
+- LLM: Llama 3 via Ollama (local, no API key required)
+- EDR Format: Wazuh
+- Framework: MITRE ATT&CK
+
 A classroom purple-team demonstration that sends synthetic Wazuh-style alerts to a local Ollama model for preliminary triage. No real telemetry or external LLM service is used. Model output is advisory and requires analyst review.
 
 ## Structure
@@ -75,3 +100,15 @@ Generated triage result JSON and CSV files are excluded by `.gitignore` because 
 ## Alert examples and references
 
 The generator creates 20 alerts with 8 TP, 4 FP, 5 TN, and 3 FN examples. The TP/FN alerts cover the six requested ATT&CK IDs. Alert examples are modeled on the [Wazuh ruleset](https://github.com/wazuh/wazuh/tree/master/ruleset/rules); verify technique names and IDs against [MITRE ATT&CK Enterprise techniques](https://attack.mitre.org/techniques/enterprise/).
+
+## Prompt Engineering & Anti-Hallucination Strategy
+
+The prompt in `src/prompts.py` treats the alert as untrusted data and tells the model to use only facts present in the alert. This helps resist instruction-like text embedded in logs and discourages the model from inventing context. The prompt gives concise mappings for the six requested ATT&CK techniques, requires `N/A` when evidence does not support a mapping, and defines a fixed severity scale. For clearly routine or explicitly approved activity, it requires `Benign Activity`, `N/A` technique fields, and Low severity.
+
+The model must return one JSON object with exactly five string fields: intent, technique name, technique ID, severity, and evidence. `src/triage.py` validates the response, canonicalizes known technique names by ID, retries one invalid or conflicting response, and applies narrow evidence checks for explicit benign context and clear attack indicators. When those checks adjust the model's suggestion, the original suggestion is retained in the results for review. These controls reduce ambiguity and make errors easier to catch; they cannot guarantee that an LLM will be correct.
+
+## Defensive Lessons Learned
+
+The synthetic examples show why alert severity alone is not enough: approved maintenance, scheduled administration, and normal logins can resemble suspicious behavior, while low-and-slow scans or other activity outside a rule's coverage may not trigger a strong alert. A SOC needs surrounding context such as approved change windows, asset roles, identity activity, and related events to distinguish legitimate behavior from attacks.
+
+The TP, FP, TN, and FN labels also illustrate that detection quality depends on both rule coverage and investigation context. Analysts should use AI summaries to prioritize investigation, then verify the underlying telemetry and ATT&CK mapping before taking action. This classroom dataset demonstrates those issues; it does not measure real enterprise detection performance or replace a production detection and response process.
