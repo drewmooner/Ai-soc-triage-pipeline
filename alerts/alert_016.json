@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-016",
+  "timestamp": "2024-06-17T16:48:11",
+  "rule": {
+    "id": "100101",
+    "level": 2,
+    "description": "Low-volume file access anomaly"
+  },
+  "agent": {
+    "id": "008",
+    "name": "web-server-02"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/audit/audit.log",
+  "data": {
+    "srcip": "192.168.1.64",
+    "dstuser": "svc-app"
+  },
+  "full_log": "Jun 16 10:23:11 web-server-02 auditd[1234]: svc-app read a small amount of sensitive payroll records outside its usual access pattern",
+  "alert_type": "FN"
+}

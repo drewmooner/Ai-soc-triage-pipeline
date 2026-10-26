@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-013",
+  "timestamp": "2024-06-14T13:39:11",
+  "rule": {
+    "id": "100201",
+    "level": 8,
+    "description": "Administrative command flagged"
+  },
+  "agent": {
+    "id": "005",
+    "name": "web-server-02"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/auth.log",
+  "data": {
+    "srcip": "192.168.1.12",
+    "dstuser": "admin"
+  },
+  "full_log": "Jun 13 10:23:11 web-server-02 sudo[1234]: admin ran approved apt-get update during the authorized maintenance window",
+  "alert_type": "FP"
+}

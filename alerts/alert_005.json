@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-005",
+  "timestamp": "2024-06-06T05:15:11",
+  "rule": {
+    "id": "5501",
+    "level": 12,
+    "description": "Unauthorized privilege escalation attempt"
+  },
+  "agent": {
+    "id": "006",
+    "name": "web-server-03"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/auth.log",
+  "data": {
+    "srcip": "192.168.1.20",
+    "dstuser": "svc-web"
+  },
+  "full_log": "Jun 05 10:23:11 web-server-03 sudo[1234]: svc-web attempted sudo execution of /tmp/unauthorized-root-shell without approval",
+  "alert_type": "TP"
+}

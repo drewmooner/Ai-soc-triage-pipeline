@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-010",
+  "timestamp": "2024-06-11T10:30:11",
+  "rule": {
+    "id": "5710",
+    "level": 3,
+    "description": "Single authentication failure"
+  },
+  "agent": {
+    "id": "002",
+    "name": "web-server-02"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/auth.log",
+  "data": {
+    "srcip": "192.168.1.61",
+    "dstuser": "admin"
+  },
+  "full_log": "Jun 10 10:23:11 web-server-02 sshd[1234]: Failed password for admin from 192.168.1.61; one attempt in this interval, similar attempts were spaced out",
+  "alert_type": "FN"
+}

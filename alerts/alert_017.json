@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-017",
+  "timestamp": "2024-06-18T17:51:11",
+  "rule": {
+    "id": "100100",
+    "level": 9,
+    "description": "Suspicious script interpreter activity"
+  },
+  "agent": {
+    "id": "009",
+    "name": "web-server-03"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/audit/audit.log",
+  "data": {
+    "srcip": "192.168.1.34",
+    "dstuser": "analyst"
+  },
+  "full_log": "Jun 17 10:23:11 web-server-03 auditd[1234]: EXECVE powershell launched an unapproved encoded script from a temporary directory",
+  "alert_type": "TP"
+}

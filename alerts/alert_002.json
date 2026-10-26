@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-002",
+  "timestamp": "2024-06-03T02:06:11",
+  "rule": {
+    "id": "100200",
+    "level": 7,
+    "description": "Many files accessed overnight"
+  },
+  "agent": {
+    "id": "003",
+    "name": "web-server-03"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/backup.log",
+  "data": {
+    "srcip": "192.168.1.10",
+    "dstuser": "backup"
+  },
+  "full_log": "Jun 02 10:23:11 web-server-03 backup-agent[1234]: scheduled admin backup read approved files at 02:00",
+  "alert_type": "FP"
+}

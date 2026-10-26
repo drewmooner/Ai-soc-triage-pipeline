@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-019",
+  "timestamp": "2024-06-20T19:57:11",
+  "rule": {
+    "id": "5500",
+    "level": 2,
+    "description": "Successful routine service login"
+  },
+  "agent": {
+    "id": "002",
+    "name": "web-server-02"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/auth.log",
+  "data": {
+    "srcip": "192.168.1.25",
+    "dstuser": "service"
+  },
+  "full_log": "Jun 19 10:23:11 web-server-02 sshd[1234]: Accepted publickey for service from approved internal address",
+  "alert_type": "TN"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-015",
+  "timestamp": "2024-06-16T15:45:11",
+  "rule": {
+    "id": "100205",
+    "level": 2,
+    "description": "Expected outbound connection"
+  },
+  "agent": {
+    "id": "007",
+    "name": "web-server-01"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/syslog",
+  "data": {
+    "srcip": "192.168.1.24",
+    "dstuser": "monitor"
+  },
+  "full_log": "Jun 15 10:23:11 web-server-01 monitor-agent[1234]: approved monitoring agent sent its scheduled heartbeat to manager",
+  "alert_type": "TN"
+}

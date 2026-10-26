@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-007",
+  "timestamp": "2024-06-08T07:21:11",
+  "rule": {
+    "id": "100202",
+    "level": 5,
+    "description": "Port sweep pattern detected"
+  },
+  "agent": {
+    "id": "008",
+    "name": "web-server-02"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/syslog",
+  "data": {
+    "srcip": "192.168.1.13",
+    "dstuser": "scanner"
+  },
+  "full_log": "Jun 07 10:23:11 web-server-02 scanner[1234]: approved vulnerability scanner ran scheduled inventory against authorized subnet",
+  "alert_type": "FP"
+}

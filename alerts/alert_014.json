@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-014",
+  "timestamp": "2024-06-15T14:42:11",
+  "rule": {
+    "id": "100102",
+    "level": 10,
+    "description": "Rapid connection attempts to many ports"
+  },
+  "agent": {
+    "id": "006",
+    "name": "web-server-03"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/syslog",
+  "data": {
+    "srcip": "192.168.1.77",
+    "dstuser": "unknown"
+  },
+  "full_log": "Jun 14 10:23:11 web-server-03 firewall[1234]: rapid TCP connection attempts from 192.168.1.77 to ports 21, 22, 23, 80, 443, 445",
+  "alert_type": "TP"
+}

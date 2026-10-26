@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-020",
+  "timestamp": "2024-06-21T20:00:11",
+  "rule": {
+    "id": "5710",
+    "level": 10,
+    "description": "Repeated failed account logins"
+  },
+  "agent": {
+    "id": "003",
+    "name": "web-server-03"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/auth.log",
+  "data": {
+    "srcip": "192.168.1.90",
+    "dstuser": "admin"
+  },
+  "full_log": "Jun 20 10:23:11 web-server-03 sshd[1234]: repeated failed passwords against multiple accounts from 192.168.1.90",
+  "alert_type": "TP"
+}

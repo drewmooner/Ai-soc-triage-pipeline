@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-018",
+  "timestamp": "2024-06-19T18:54:11",
+  "rule": {
+    "id": "5710",
+    "level": 6,
+    "description": "Several SSH authentication failures"
+  },
+  "agent": {
+    "id": "001",
+    "name": "web-server-01"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/auth.log",
+  "data": {
+    "srcip": "192.168.1.11",
+    "dstuser": "deploy"
+  },
+  "full_log": "Jun 18 10:23:11 web-server-01 sshd[1234]: deploy user had several failed password attempts, then authenticated successfully during approved maintenance",
+  "alert_type": "FP"
+}

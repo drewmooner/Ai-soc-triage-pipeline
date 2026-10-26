@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-011",
+  "timestamp": "2024-06-12T11:33:11",
+  "rule": {
+    "id": "100204",
+    "level": 1,
+    "description": "Normal file access"
+  },
+  "agent": {
+    "id": "003",
+    "name": "web-server-03"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/audit/audit.log",
+  "data": {
+    "srcip": "192.168.1.23",
+    "dstuser": "user4"
+  },
+  "full_log": "Jun 11 10:23:11 web-server-03 auditd[1234]: user4 read own project documentation in authorized directory",
+  "alert_type": "TN"
+}

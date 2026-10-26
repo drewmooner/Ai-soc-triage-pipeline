@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-006",
+  "timestamp": "2024-06-07T06:18:11",
+  "rule": {
+    "id": "100100",
+    "level": 9,
+    "description": "Suspicious shell command execution"
+  },
+  "agent": {
+    "id": "007",
+    "name": "web-server-01"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/audit/audit.log",
+  "data": {
+    "srcip": "192.168.1.33",
+    "dstuser": "analyst"
+  },
+  "full_log": "Jun 06 10:23:11 web-server-01 auditd[1234]: EXECVE bash -c with encoded command launching an unapproved script",
+  "alert_type": "TP"
+}

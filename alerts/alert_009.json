@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-009",
+  "timestamp": "2024-06-10T09:27:11",
+  "rule": {
+    "id": "100101",
+    "level": 11,
+    "description": "Sensitive file read by unexpected process"
+  },
+  "agent": {
+    "id": "001",
+    "name": "web-server-01"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/audit/audit.log",
+  "data": {
+    "srcip": "192.168.1.52",
+    "dstuser": "www-data"
+  },
+  "full_log": "Jun 09 10:23:11 web-server-01 auditd[1234]: www-data process read /etc/shadow; access denied by file policy",
+  "alert_type": "TP"
+}

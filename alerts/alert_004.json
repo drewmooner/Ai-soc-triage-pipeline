@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-004",
+  "timestamp": "2024-06-05T04:12:11",
+  "rule": {
+    "id": "100102",
+    "level": 2,
+    "description": "Low-rate connections to several ports"
+  },
+  "agent": {
+    "id": "005",
+    "name": "web-server-02"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/syslog",
+  "data": {
+    "srcip": "192.168.1.65",
+    "dstuser": "unknown"
+  },
+  "full_log": "Jun 04 10:23:11 web-server-02 firewall[1234]: TCP SYN from 192.168.1.65 to ports 22, 80, 443, one connection per minute",
+  "alert_type": "FN"
+}

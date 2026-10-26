@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-012",
+  "timestamp": "2024-06-13T12:36:11",
+  "rule": {
+    "id": "100103",
+    "level": 13,
+    "description": "Malicious attachment execution detected"
+  },
+  "agent": {
+    "id": "004",
+    "name": "web-server-01"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/clamav/clamd.log",
+  "data": {
+    "srcip": "192.168.1.88",
+    "dstuser": "user1"
+  },
+  "full_log": "Jun 12 10:23:11 web-server-01 clamd[1234]: user1 opened and executed malicious email attachment; malware signature detected and file quarantined",
+  "alert_type": "TP"
+}

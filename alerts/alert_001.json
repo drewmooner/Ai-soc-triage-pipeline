@@ -1,0 +1,23 @@
+{
+  "id": "synthetic-alert-001",
+  "timestamp": "2024-06-02T01:03:11",
+  "rule": {
+    "id": "5710",
+    "level": 10,
+    "description": "Multiple failed SSH login attempts"
+  },
+  "agent": {
+    "id": "002",
+    "name": "web-server-02"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "location": "/var/log/auth.log",
+  "data": {
+    "srcip": "192.168.1.45",
+    "dstuser": "root"
+  },
+  "full_log": "Jun 01 10:23:11 web-server-02 sshd[1234]: Failed password for root from 192.168.1.45; repeated failures observed",
+  "alert_type": "TP"
+}
